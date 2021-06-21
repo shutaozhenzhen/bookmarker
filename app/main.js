@@ -12,7 +12,7 @@ app.on('ready', () => {
 			contextIsolation: false
 		}
 	})
-	mainWindow.webContents.openDevTools()
+	//mainWindow.webContents.openDevTools()
 	mainWindow.webContents.loadURL(`file://${__dirname}/index.html`)
 	
 })
