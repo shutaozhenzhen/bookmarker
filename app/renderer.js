@@ -23,6 +23,14 @@ newLinkForm.addEventListener('submit', (event) => {
 	event.preventDefault()
 	const url = newLinkUrl.value
 	fetch(url)
+		.then(reponse => {
+			if (reponse.ok) {
+				return reponse
+			} else {
+				throw new Error(`Status code of ${reponse.status}
+				${reponse.statusText}`)
+			}
+		})
 		.then(reponse => reponse.text())
 		.then(text => parser.parseFromString(text, 'text/html'))
 		.then(nodes => nodes.querySelector('title').innerText)
@@ -30,6 +38,14 @@ newLinkForm.addEventListener('submit', (event) => {
 		.then(() => newLinkUrl.value = null)
 		.then(() => newLinkSubmit.disabled = true)
 		.then(renderLinks)
+		.catch(error => {
+			errorMessage.innerHTML = `
+		There is an issue adding "${url}": ${error.message}
+		`.trim()
+			setTimeout(() => {
+				errorMessage.innerHTML = null
+			}, 5000)
+		})
 })
 clearStorageButton.addEventListener('click', () => {
 	localStorage.clear()
