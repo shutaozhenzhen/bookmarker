@@ -1,8 +1,9 @@
 const {
 	app,
-	BrowserWindow
+	BrowserWindow,
+	ipcMain
 } = require('electron')
-
+const path = require('path')
 let mainWindow = null
 app.on('ready', () => {
 	console.log('Hello from Electron.')
@@ -13,6 +14,6 @@ app.on('ready', () => {
 		}
 	})
 	//mainWindow.webContents.openDevTools()
-	mainWindow.webContents.loadURL(`file://${__dirname}/index.html`)
+	mainWindow.webContents.loadFile(path.join(__dirname,'index.html'))
 	
 })
