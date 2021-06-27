@@ -1,4 +1,3 @@
-const {shell}=require('electron')
 const parser = new DOMParser()
 const linksSection = document.querySelector('.links')
 const errorMessage = document.querySelector('.error-message')
@@ -55,6 +54,6 @@ clearStorageButton.addEventListener('click', () => {
 linksSection.addEventListener('click',(event)=>{
 	if(event.target.href){
 		event.preventDefault()
-		shell.openExternal(event.target.href)
+		window.renderer.shell_open(event.target.href)
 	}
 })
